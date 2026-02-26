@@ -1,37 +1,65 @@
-```
-check the current folder project folder and lets setup a simple react + ts + vite + ant d + SCSS Modules + SPA saying "Hello World!"
-```
+# Instructions for Setting Up the Project with OpenCode
 
-Execute `/init` in the terminal to initialize the project with the following configuration
-that will create AGENTS.md
+1. **Initialize the Project**  
+   Open the terminal and execute the following command to initialize the project:
 
-```
-Create the following directory structure if it does not exist: .opencode/agents/
-```
+   ```bash
+   /init
+   ```
 
-```
-Create: .opencode/agents/frontend-react-agent.md This agent is responsible for UI and feature creation with knowledge in3 node + react + Redux Toolkit + RTK Query + Ant Design + ESLint + Prettier
-```
+   This will create the `AGENTS.md` file and set up the project environment.
 
-quit the opencode terminal
-run `exit` in the terminal to exit the opencode environment and return to the normal terminal.
+2. **Create the Required Directory Structure**  
+   Ensure the following directory structure exists:
 
-open opencode in the terminal again by running `opencode` to see the newly created AGENTS.md and .opencode/agents/frontend-react-agent.md files with the appropriate content.
+   ```
+   .opencode/
+       agents/
+   ```
 
-now, using the created agent `frontend-react-agent` run this prompt
+3. **Create the Frontend Agent**  
+   Inside the `.opencode/agents/` directory, create a file named `frontend-react-agent.md` with the following description:
 
-```create simple Home page saying "Hello" with a link to a login page. do not implement the login page yet
+   ```
+   This agent is responsible for UI and feature creation with knowledge in:
+   - Node.js
+   - React
+   - Redux Toolkit
+   - RTK Query
+   - Ant Design
+   - ESLint
+   - Prettier
+   ```
 
-```
+4. **Exit the OpenCode Environment**  
+   Quit the OpenCode terminal by running:
 
-```
-refactor the project structure to have folder to contains the pages here /src/pages. move the `Home` component to pages folder
-```
+   ```bash
+   exit
+   ```
 
-```
-follow the convention to use sass modules. remove the style inline in `Home` component and create its own Home.module.scs
-```
+5. **Reopen OpenCode**  
+   Reopen the OpenCode environment by running:
 
-```
-let implement the Login page with a form to login to the system with username/email and password and login button
-```
+   ```bash
+   opencode
+   ```
+
+   Verify that the `AGENTS.md` file and `.opencode/agents/frontend-react-agent.md` file have been created with the appropriate content.
+
+6. **Run the Frontend Agent**  
+   Use the `frontend-react-agent` to execute the following prompt:
+
+   ```plaintext
+   Create a simple Home page saying "Hello" with a link to a login page. Do not implement the login page yet.
+   ```
+
+7. **Refactor the Project Structure**  
+   Refactor the project to follow the proper structure:
+   - Move the `Home` component to the `/src/pages` folder.
+   - Ensure the `Home` component uses SCSS modules. Remove any inline styles and create a `Home.module.scss` file for its styles.
+
+8. **Implement the Login Page**  
+   Create a `Login` page with the following features:
+   - A form containing fields for `username/email` and `password`.
+   - A `Login` button to submit the form.
