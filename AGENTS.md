@@ -131,4 +131,5 @@ Global ignores: `dist/`
 ## Notes for Agents
 
 - Always confirm the presence of necessary tools (e.g., Node.js, npm).
+- Always build the app after any change (`npm run build`) to ensure no issues are introduced.
 - Follow this style guide strictly to maintain codebase consistency.
