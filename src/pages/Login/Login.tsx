@@ -1,16 +1,21 @@
 import React from "react";
 import { Form, Input, Button, Layout } from "antd";
+import type { FormProps } from "antd";
 import styles from "./Login.module.scss";
 
 const { Header, Content } = Layout;
 
-const Login: React.FC = () => {
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
-  };
+interface ILoginFormValues {
+  username: string;
+  password: string;
+  remember?: boolean;
+}
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+const Login: React.FC = () => {
+  const onFinishFailed: FormProps<ILoginFormValues>["onFinishFailed"] = (
+    errorInfo,
+  ) => {
+    console.error("Login submit failed", { errorInfo });
   };
 
   return (
@@ -21,7 +26,6 @@ const Login: React.FC = () => {
           name="login"
           className={styles.form}
           initialValues={{ remember: true }}
-          onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
