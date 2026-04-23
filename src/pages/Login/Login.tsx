@@ -3,7 +3,8 @@ import { Form, Input, Button, Layout, message } from "antd";
 import type { FormProps } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { login } from "../../features/auth/authSlice";
+import { setUsername } from "../../features/auth/authSlice";
+import { useLoginMutation } from "../../features/auth/authApi";
 import styles from "./Login.module.scss";
 
 const { Header, Content } = Layout;
@@ -17,17 +18,19 @@ interface ILoginFormValues {
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const status = useAppSelector((state) => state.auth.status);
+  const username = useAppSelector((state) => state.auth.username);
+  const [login, { isLoading }] = useLoginMutation();
 
   const onFinish: FormProps<ILoginFormValues>["onFinish"] = async (values) => {
     try {
-      await dispatch(
-        login({ username: values.username, password: values.password }),
-      ).unwrap();
+      const data = await login({
+        username: values.username,
+        password: values.password,
+      }).unwrap();
+      dispatch(setUsername(data.name));
       navigate("/");
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Login failed";
+      const errorMessage = error instanceof Error ? error.message : "Login failed";
       message.error(errorMessage);
     }
   };
@@ -73,12 +76,13 @@ const Login: React.FC = () => {
               type="primary"
               htmlType="submit"
               className={styles.loginButton}
-              loading={status === "loading"}
+              loading={isLoading}
             >
               Log in
             </Button>
           </Form.Item>
         </Form>
+        {username ? <p>Logged in as: {username}</p> : null}
       </Content>
     </Layout>
   );
