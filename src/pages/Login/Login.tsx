@@ -1,6 +1,9 @@
 import React from "react";
-import { Form, Input, Button, Layout } from "antd";
+import { Form, Input, Button, Layout, message } from "antd";
 import type { FormProps } from "antd";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { login } from "../../features/auth/authSlice";
 import styles from "./Login.module.scss";
 
 const { Header, Content } = Layout;
@@ -12,6 +15,23 @@ interface ILoginFormValues {
 }
 
 const Login: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const status = useAppSelector((state) => state.auth.status);
+
+  const onFinish: FormProps<ILoginFormValues>["onFinish"] = async (values) => {
+    try {
+      await dispatch(
+        login({ username: values.username, password: values.password }),
+      ).unwrap();
+      navigate("/");
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Login failed";
+      message.error(errorMessage);
+    }
+  };
+
   const onFinishFailed: FormProps<ILoginFormValues>["onFinishFailed"] = (
     errorInfo,
   ) => {
@@ -26,6 +46,7 @@ const Login: React.FC = () => {
           name="login"
           className={styles.form}
           initialValues={{ remember: true }}
+          onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
@@ -52,6 +73,7 @@ const Login: React.FC = () => {
               type="primary"
               htmlType="submit"
               className={styles.loginButton}
+              loading={status === "loading"}
             >
               Log in
             </Button>
