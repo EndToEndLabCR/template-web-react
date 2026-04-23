@@ -42,6 +42,37 @@ Currently, no specific test commands or configurations are defined in the `packa
 
 ---
 
+This section is the canonical source for response verbosity and token efficiency across repository AI setup files.
+
+### Default Verbosity Policy
+
+- **Default mode:** Low verbosity for routine responses.
+- **Escalation:** Use Medium only when the task requires extra context for correctness.
+- **Deep detail:** Use High only for explicit user requests or complex, high-risk documentation decisions.
+- **Rule:** If unsure, start Low and expand only on request.
+
+### Hybrid Token Budgets
+
+- **Default budget:** 150-200 tokens for normal responses.
+- **Extended budget:** 500-700 tokens for complex multi-step outputs.
+- **Complexity triggers for extended budget (at least one required):**
+  - Multi-phase plans with dependencies.
+  - Trade-off analysis or decision matrices.
+  - User explicitly requests deep detail.
+
+### Response Efficiency Rules
+
+- Prioritize concise bullets and short sections over long prose.
+- Avoid repeating repository or conversation context already established.
+- Include only critical decisions, actions, risks, and next steps.
+- Prefer incremental delivery for long tasks instead of one oversized response.
+
+### Stop/Continue Pattern
+
+- When approaching budget limits, end with a brief checkpoint summary.
+- Continue with additional detail only when needed or requested.
+- Do not duplicate earlier sections when continuing.
+
 ## Code Style Guidelines
 
 ### Import Structure
